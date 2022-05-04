@@ -96,6 +96,7 @@ public:
 	// In:	_copy				The object to copy from
 	DynArray(const DynArray& _copy) {
 		// TODO: Implement this method
+		mArray = nullptr;
 		*this = _copy;
 	}
 
