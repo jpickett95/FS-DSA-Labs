@@ -41,7 +41,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB1_BRACKET_OPERATOR						1
 #define LAB1_SIZE_ACCESSOR							1
 #define LAB1_CAPACITY_ACCESSOR						1
-#define LAB1_RESERVE_EMPTY							0
+#define LAB1_RESERVE_EMPTY							1
 #define LAB1_RESERVE_DOUBLE_CAPACITY				1
 #define LAB1_RESERVE_LARGER_CAPACITY				1
 #define LAB1_RESERVE_SMALLER_CAPACITY				1
@@ -162,24 +162,32 @@ public:
 	//	SPECIAL CASE: If mCapacity is 0, then it should be set to 1
 	void Reserve(size_t _newCapacity = 0) {
 		// TODO: Implement this method
-		if (mCapacity == 0)
-			mCapacity = 1;
-		else if (_newCapacity == 0) {
-			mCapacity = mCapacity * 2;
-		}
-		else if (_newCapacity > mCapacity) {
-			mCapacity = _newCapacity;
-		}
-		
-		Type* temp = new Type[mCapacity];
-		for (int i = 0; i < mCapacity; i++) {
+		if (_newCapacity < mCapacity && _newCapacity != 0);
+		else {
+			if (mCapacity == 0 && _newCapacity == 0)
+				mCapacity = 1;
+			else if (_newCapacity == 0) {
+				mCapacity = mCapacity * 2;
+			}
+			else if (_newCapacity > mCapacity) {
+				mCapacity = _newCapacity;
+			}
 
-				temp[i] = mArray[i]; 
-
-		}			
-		delete[] mArray;
-		mArray = new Type[mCapacity];
-		for (int i = 0; i < mCapacity; i++)
-			mArray[i] = temp[i];
+			if (mArray == nullptr) {
+				delete[] mArray;
+				mArray = new Type[mCapacity];
+			}
+			else {
+				Type* temp = new Type[mCapacity];
+				for (int i = 0; i < mCapacity; i++) {
+					temp[i] = mArray[i];
+				}
+				delete[] mArray;
+				mArray = new Type[mCapacity];
+				for (int i = 0; i < mCapacity; i++)
+					mArray[i] = temp[i];
+				delete[] temp;
+			}
+		}
 	}
 };
