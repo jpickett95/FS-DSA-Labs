@@ -50,7 +50,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB1_CLEAR									1
 #define LAB1_DESTRUCTOR								1
 #define LAB1_ASSIGNMENT_OPERATOR					1
-#define LAB1_COPY_CONSTRUCTOR						0
+#define LAB1_COPY_CONSTRUCTOR						1
 
 // Our implementation of a vector (simplified)
 template<typename Type>
@@ -95,8 +95,8 @@ public:
 	//		Used to initialize one object to another
 	// In:	_copy				The object to copy from
 	DynArray(const DynArray& _copy) {
-		// TODO: Implement this metho
-
+		// TODO: Implement this method
+		*this = _copy;
 	}
 
 	// Assignment operator
