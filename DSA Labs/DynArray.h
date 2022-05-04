@@ -37,14 +37,14 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define LAB1_DEFAULT_CONSTRUCTOR_NO_ARGS			1
-#define LAB1_DEFAULT_CONSTRUCTOR_WITH_ARGS			0
-#define LAB1_BRACKET_OPERATOR						0
-#define LAB1_SIZE_ACCESSOR							0
-#define LAB1_CAPACITY_ACCESSOR						0
+#define LAB1_DEFAULT_CONSTRUCTOR_WITH_ARGS			1
+#define LAB1_BRACKET_OPERATOR						1
+#define LAB1_SIZE_ACCESSOR							1
+#define LAB1_CAPACITY_ACCESSOR						1
 #define LAB1_RESERVE_EMPTY							0
-#define LAB1_RESERVE_DOUBLE_CAPACITY				0
-#define LAB1_RESERVE_LARGER_CAPACITY				0
-#define LAB1_RESERVE_SMALLER_CAPACITY				0
+#define LAB1_RESERVE_DOUBLE_CAPACITY				1
+#define LAB1_RESERVE_LARGER_CAPACITY				1
+#define LAB1_RESERVE_SMALLER_CAPACITY				1
 #define LAB1_APPEND_NO_RESIZE						0
 #define LAB1_APPEND_RESIZE							0
 #define LAB1_CLEAR									0
@@ -75,7 +75,13 @@ public:
 	// Note: Do not allocate any memory if the _startingCap is 0
 	DynArray(size_t _startingCap = 0) {
 		// TODO: Implement this method
+		mCapacity = _startingCap;
+		mSize = 0; // no elements in the array yet
 
+		if (_startingCap == 0) // if 0, no memory allocated
+			mArray = nullptr;
+		else // create a new array of mCapacity
+			mArray = new Type[mCapacity];
 	};
 
 	// Destructor
@@ -119,6 +125,7 @@ public:
 	// Return: The item at the specified index (by reference)
 	Type& operator[](size_t _index) {
 		// TODO: Implement this method
+		return *(mArray + _index);
 	
 	}
 
@@ -155,6 +162,24 @@ public:
 	//	SPECIAL CASE: If mCapacity is 0, then it should be set to 1
 	void Reserve(size_t _newCapacity = 0) {
 		// TODO: Implement this method
-	
+		if (mCapacity == 0)
+			mCapacity = 1;
+		else if (_newCapacity == 0) {
+			mCapacity = mCapacity * 2;
+		}
+		else if (_newCapacity > mCapacity) {
+			mCapacity = _newCapacity;
+		}
+		
+		Type* temp = new Type[mCapacity];
+		for (int i = 0; i < mCapacity; i++) {
+
+				temp[i] = mArray[i]; 
+
+		}			
+		delete[] mArray;
+		mArray = new Type[mCapacity];
+		for (int i = 0; i < mCapacity; i++)
+			mArray[i] = temp[i];
 	}
 };
