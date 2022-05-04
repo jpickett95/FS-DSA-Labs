@@ -45,11 +45,11 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB1_RESERVE_DOUBLE_CAPACITY				1
 #define LAB1_RESERVE_LARGER_CAPACITY				1
 #define LAB1_RESERVE_SMALLER_CAPACITY				1
-#define LAB1_APPEND_NO_RESIZE						0
-#define LAB1_APPEND_RESIZE							0
-#define LAB1_CLEAR									0
-#define LAB1_DESTRUCTOR								0
-#define LAB1_ASSIGNMENT_OPERATOR					0
+#define LAB1_APPEND_NO_RESIZE						1
+#define LAB1_APPEND_RESIZE							1
+#define LAB1_CLEAR									1
+#define LAB1_DESTRUCTOR								1
+#define LAB1_ASSIGNMENT_OPERATOR					1
 #define LAB1_COPY_CONSTRUCTOR						0
 
 // Our implementation of a vector (simplified)
@@ -88,7 +88,7 @@ public:
 	//		Cleans up all dynamically allocated memory
 	~DynArray() {
 		// TODO: Implement this method
-
+		Clear();
 	}
 
 	// Copy constructor
@@ -107,6 +107,16 @@ public:
 	//		This allows us to daisy-chain
 	DynArray& operator=(const DynArray& _assign) {
 		// TODO: Implement this method
+		if (this != &_assign)
+		{
+			Clear();
+			mCapacity = _assign.mCapacity;
+			mSize = _assign.mSize;
+			mArray = new Type[mCapacity];  
+			for (int i = 0; i < mSize; i++)
+				mArray[i] = _assign.mArray[i];
+		}
+		return *this;
 	
 	}
 
@@ -115,6 +125,10 @@ public:
 	//		Sets all data members back to default values
 	void Clear() {
 		// TODO: Implement this method
+		delete[] mArray;
+		mCapacity = 0;
+		mSize = 0;
+		mArray = nullptr;
 	
 	}
 
@@ -151,6 +165,10 @@ public:
 	// In:	_data			The item to be added
 	void Append(const Type& _data) {
 		// TODO: Implement this method
+		if (mSize == mCapacity)
+			Reserve();
+		*(mArray + mSize) = _data; 
+		mSize++;
 	
 	}
 
