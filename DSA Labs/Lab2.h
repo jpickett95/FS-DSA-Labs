@@ -43,7 +43,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB2_CLEAR					1
 #define LAB2_SORT_ASCENDING			1
 #define LAB2_SORT_DESCENDING		1
-#define LAB2_BRACKETS				0
+#define LAB2_BRACKETS				1
 #define LAB2_CONTAINS_TRUE			0
 #define LAB2_CONTAINS_FALSE			0
 #define LAB2_MOVE_PALINDROMES		0
@@ -149,6 +149,7 @@ public:
 	int operator[](int _index) {
 		// TODO: Implement this method
 
+		return mValues.at(_index);
 	}
 
 	// Determine if a value is present in the vector
