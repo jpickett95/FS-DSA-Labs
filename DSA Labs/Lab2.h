@@ -45,7 +45,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB2_SORT_DESCENDING		1
 #define LAB2_BRACKETS				1
 #define LAB2_CONTAINS_TRUE			1
-#define LAB2_CONTAINS_FALSE			0
+#define LAB2_CONTAINS_FALSE			1
 #define LAB2_MOVE_PALINDROMES		0
 
 /************/
