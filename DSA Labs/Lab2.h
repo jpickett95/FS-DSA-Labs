@@ -34,12 +34,12 @@ NOTE: If the unit test is not on, that code will not be compiled!
 */
 
 // Main toggle
-#define LAB_2	0
+#define LAB_2	1
 
 // Individual unit test toggles
-#define LAB2_PALINDROME_NUMBER		0
-#define LAB2_FILL_FILE				0
-#define LAB2_FILL_ARRAY				0
+#define LAB2_PALINDROME_NUMBER		1
+#define LAB2_FILL_FILE				1
+#define LAB2_FILL_ARRAY				1
 #define LAB2_CLEAR					0
 #define LAB2_SORT_ASCENDING			0
 #define LAB2_SORT_DESCENDING		0
@@ -64,8 +64,20 @@ NOTE: If the unit test is not on, that code will not be compiled!
 //
 // Return: True, if the number is a palindrome number
 inline bool IsPalindromeNumber(unsigned int _num) {
-	// TODO: Implement this function	
-	
+	// TODO: Implement this function
+
+	unsigned int number = _num; // variable to hold reversed number
+	std::string temp; 
+	while (number > 0) {
+		temp += std::to_string((number % 10)); // add the last digit to the string
+		number /= 10; // decrement the number by 1 digit
+	}
+	number = std::stoi(temp); //copy reversed number from string back to 'number' variable
+
+	if (number == _num) // check if values are equal
+		return true;
+	else
+		return false;
 }
 
 class DSA_Lab2
@@ -86,6 +98,18 @@ public:
 	void Fill(const char* _input) {
 		// TODO: Implement this method
 
+		std::ifstream binifl(_input, std::ios::binary); // open binary file
+
+		int numOfValues; // initialize variable for 1st 4 bytes
+		binifl.read((char*)&numOfValues, sizeof(int)); // read first 4 bytes to see how many ints total
+
+		int value; // initialize variable to store each value read
+		for (int i = 0; i < numOfValues; ++i) {
+			binifl.read((char*)&value, sizeof(int)); // read the int
+			mValues.push_back(value); // add int to vector
+		}
+
+		binifl.close(); // close the file
 	}
 
 	// Fill out the mValues vector with the contents of an array
@@ -94,7 +118,8 @@ public:
 	//		_size			The number of elements in the array
 	void Fill(const int* _arr, size_t _size) {
 		// TODO: Implement this method
-
+		for (int i = 0; i < _size; ++i)
+			mValues.push_back(_arr[i]);
 	}
 
 	// Remove all elements from vector and decrease capacity to 0
