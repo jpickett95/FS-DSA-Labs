@@ -46,7 +46,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB2_BRACKETS				1
 #define LAB2_CONTAINS_TRUE			1
 #define LAB2_CONTAINS_FALSE			1
-#define LAB2_MOVE_PALINDROMES		0
+#define LAB2_MOVE_PALINDROMES		1
 
 /************/
 /* Includes */
@@ -179,6 +179,14 @@ public:
 	void MovePalindromes() {	
 		// TODO: Implement this method
 
+		for (std::vector<int>::iterator iter = mValues.begin(); iter != mValues.end(); ) {
+			if (IsPalindromeNumber((int)*iter) == true) {
+				mPalindromes.push_back(*iter);
+				mValues.erase(iter);
+			}
+			if (iter == mValues.end())
+				break;
+		}
 	}
 };
 
