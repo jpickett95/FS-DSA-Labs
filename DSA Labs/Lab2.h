@@ -179,13 +179,13 @@ public:
 	void MovePalindromes() {	
 		// TODO: Implement this method
 
-		for (std::vector<int>::iterator iter = mValues.begin(); iter != mValues.end(); ) {
-			if (IsPalindromeNumber((int)*iter) == true) {
-				mPalindromes.push_back(*iter);
-				mValues.erase(iter);
+		for (std::vector<int>::iterator iter = mValues.begin(); iter != mValues.end(); ) { //iterate through vector
+			if (IsPalindromeNumber((int)*iter) == true) { // check if palindrome
+				mPalindromes.push_back(*iter); // add to vector if true
+				iter = mValues.erase(iter); // erase from old vector & set iter to next pointer
 			}
-			if (iter == mValues.end())
-				break;
+			else // if not not erase, increment iter
+				++iter;
 		}
 	}
 };
