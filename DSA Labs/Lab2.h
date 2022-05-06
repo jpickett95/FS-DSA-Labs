@@ -44,7 +44,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB2_SORT_ASCENDING			1
 #define LAB2_SORT_DESCENDING		1
 #define LAB2_BRACKETS				1
-#define LAB2_CONTAINS_TRUE			0
+#define LAB2_CONTAINS_TRUE			1
 #define LAB2_CONTAINS_FALSE			0
 #define LAB2_MOVE_PALINDROMES		0
 
@@ -160,6 +160,13 @@ public:
 	bool Contains(int _val) const {
 		// TODO: Implement this method
 
+		bool isTrue = false; // initialize variable to be returned - bool
+		for (int i = 0; i < mValues.size(); i++) // loop through vector
+			if (_val == mValues[i]) { // check if values are equal
+				isTrue = true; // return true if value is present
+				break;
+			}
+		return isTrue;
 	}
 
 	// Move all palindrome numbers from mValues vector to mPalindromes vector
