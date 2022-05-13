@@ -42,13 +42,14 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB4_QUEUE_REMOVE			1
 #define LAB4_STACK_REMOVE			1
 #define LAB4_INSERT_ITER			1
-#define LAB4_INSERT_INDEX			0
-#define LAB4_REMOVE_DECIMAL			0
+#define LAB4_INSERT_INDEX			1
+#define LAB4_REMOVE_DECIMAL			1
 
 /************/
 /* Includes */
 /************/
 #include <list>
+#include <cmath> // for fmod() in REMOVE_DECIMAL()
 
 class DSA_Lab4 {
 
@@ -122,6 +123,10 @@ public:
 	void Insert(int _index, float _val) {
 		// TODO: Implement this method
 
+		std::list<float>::iterator it = mList.begin();
+		for (int i = 0; i < _index; ++i)
+			++it;
+		mList.emplace(it, _val);
 	}
 
 	// Insert a value at the spot specified by the iterator passed in
@@ -130,7 +135,7 @@ public:
 	//		_val		The value to insert
 	void Insert(std::list<float>::iterator _iter, float _val) {
 		// TODO: Implement this method
-
+		mList.insert(_iter, _val);
 	}
 
 	// Remove all values from mList that have a decimal place > _decimal
@@ -141,6 +146,14 @@ public:
 	// Return: The total number of values removed
 	int RemoveDecimalGreater(float _decimal) {
 		// TODO: Implement this method
-
+		int numRemoved = 0;
+		for (std::list<float>::iterator it = mList.begin(); it != mList.end();)
+			if (fmod(*it, 1) > _decimal) {
+				it = mList.erase(it);
+				++numRemoved;
+			}
+			else
+				++it;
+		return numRemoved;
  	}
 };
