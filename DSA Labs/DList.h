@@ -48,7 +48,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_DTOR						1
 #define LAB3_ITER_BEGIN					0
 #define LAB3_ITER_END					0
-#define LAB3_ITER_INCREMENT_PRE			0
+#define LAB3_ITER_INCREMENT_PRE			1
 #define LAB3_ITER_INCREMENT_POST		0
 #define LAB3_ITER_DECREMENT_PRE			0
 #define LAB3_ITER_DECREMENT_POST		0
@@ -112,6 +112,8 @@ public:
 		Iterator& operator++() {
 			// TODO: Implement this method
 
+			mCurr = mCurr->next;
+			return *this;
 		}
 
 		// Post-fix increment operator
