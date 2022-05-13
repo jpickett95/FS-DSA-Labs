@@ -53,9 +53,9 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ITER_DECREMENT_PRE			1
 #define LAB3_ITER_DECREMENT_POST		1
 #define LAB3_ITER_DEREFERENCE			1
-#define LAB3_INSERT_EMPTY				0
-#define LAB3_INSERT_HEAD				0
-#define LAB3_INSERT_MIDDLE				0
+#define LAB3_INSERT_EMPTY				1
+#define LAB3_INSERT_HEAD				1
+#define LAB3_INSERT_MIDDLE				1
 #define LAB3_ERASE_EMPTY				0
 #define LAB3_ERASE_HEAD					0
 #define LAB3_ERASE_TAIL					0
@@ -359,7 +359,13 @@ public:
 	// NOTE:	The iterator should now be pointing to the new node created
 	Iterator Insert(Iterator& _iter, const Type& _data) {
 		// Implement this method
+		if (mHead == nullptr) {
+			mHead = mTail = new Node(_data, nullptr, nullptr);
+			++mSize;
+			_iter.mCurr = mHead;
+		}
 
+		return _iter;
 	}
 
 	// Erase a Node from the list
