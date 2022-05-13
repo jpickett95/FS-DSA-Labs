@@ -38,7 +38,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define LAB3_CTOR						1
-#define LAB3_NODE_CTOR_DEFAULT			0
+#define LAB3_NODE_CTOR_DEFAULT			1
 #define LAB3_NODE_CTOR					0
 #define LAB3_ADDHEAD_EMPTY				0
 #define LAB3_ADDHEAD					0
