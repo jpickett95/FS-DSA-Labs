@@ -45,7 +45,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ADDTAIL_EMPTY				1
 #define LAB3_ADDTAIL					1
 #define LAB3_CLEAR						1
-#define LAB3_DTOR						0
+#define LAB3_DTOR						1
 #define LAB3_ITER_BEGIN					0
 #define LAB3_ITER_END					0
 #define LAB3_ITER_INCREMENT_PRE			0
@@ -230,6 +230,8 @@ public:
 	~DList() {
 		// TODO: Implement this method
 
+		Clear();
+
 	}
 
 	// Copy constructor
@@ -309,10 +311,12 @@ private:
 	// In:	_curr		The current Node to clear
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
-
-		if (_curr->next != nullptr) // exit condition
-			RecursiveClear(_curr->next);
-		delete _curr;
+		
+		if (_curr != nullptr) { // check if _curr is nullptr
+			if (_curr->next != nullptr) // exit condition
+				RecursiveClear(_curr->next);
+			delete _curr;
+		}
 	}
 
 public:
