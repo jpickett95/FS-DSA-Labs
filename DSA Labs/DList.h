@@ -47,7 +47,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_CLEAR						1
 #define LAB3_DTOR						1
 #define LAB3_ITER_BEGIN					1
-#define LAB3_ITER_END					0
+#define LAB3_ITER_END					1
 #define LAB3_ITER_INCREMENT_PRE			1
 #define LAB3_ITER_INCREMENT_POST		1
 #define LAB3_ITER_DECREMENT_PRE			1
@@ -392,7 +392,10 @@ public:
 	// Return: An iterator that has its curr pointing to the list's head
 	Iterator Begin() {
 		// TODO: Implement this method
-		
+
+		Iterator it; // create an iterator
+		it.mCurr = mHead; // have the iterator's mCurr  point to the list's head
+		return it; // return iterator
 	
 	}
 
@@ -402,5 +405,8 @@ public:
 	Iterator End() {
 		// TODO: Implement this method
 		
+		Iterator it; // create an iterator
+		it.mCurr = mTail->next; // have the iterator's mCurr  point to nullptr
+		return it; // return iterator
 	}
 };
