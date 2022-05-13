@@ -359,13 +359,19 @@ public:
 	// NOTE:	The iterator should now be pointing to the new node created
 	Iterator Insert(Iterator& _iter, const Type& _data) {
 		// Implement this method
-		if (mHead == nullptr) {
-			mHead = mTail = new Node(_data, nullptr, nullptr);
-			++mSize;
-			_iter.mCurr = mHead;
+		if (_iter.mCurr == nullptr) { // if list is empty
+			_iter.mCurr = mHead = mTail = new Node(_data, nullptr, nullptr);
 		}
-
-		return _iter;
+		else if (_iter.mCurr == mHead) { // if inserting at head
+			
+			_iter.mCurr = mHead = new Node(_data, mHead, nullptr);
+		}
+		else { // general insert
+			_iter.mCurr = _iter.mCurr->prev = _iter.mCurr->prev->next = new Node(_data, _iter.mCurr, _iter.mCurr->prev);
+		}
+		
+		++mSize; // increment size
+		return _iter; // return iteration
 	}
 
 	// Erase a Node from the list
