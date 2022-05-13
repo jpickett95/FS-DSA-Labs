@@ -40,8 +40,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_CTOR						1
 #define LAB3_NODE_CTOR_DEFAULT			1
 #define LAB3_NODE_CTOR					1
-#define LAB3_ADDHEAD_EMPTY				0
-#define LAB3_ADDHEAD					0
+#define LAB3_ADDHEAD_EMPTY				1
+#define LAB3_ADDHEAD					1
 #define LAB3_ADDTAIL_EMPTY				0
 #define LAB3_ADDTAIL					0
 #define LAB3_CLEAR						0
@@ -264,7 +264,15 @@ public:
 	// In:	_data			The object to add to the list
 	void AddHead(const Type& _data) {
 		// TODO: Implement this method
-
+		if (mHead == nullptr) { // check if mHead is empty
+			mHead = mTail = new Node(_data, nullptr, nullptr); // assign new node to both head & tail
+			++mSize; // increment size
+		}
+		else {
+			mHead = mHead->prev = new Node(_data, mHead, nullptr); // assign head to new node, and current head's prev node to new node
+			++mSize; // increment size
+		}
+		
 	}
 
 	// Add a piece of data to the end of the list
