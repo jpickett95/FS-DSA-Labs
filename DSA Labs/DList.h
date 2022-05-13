@@ -52,7 +52,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ITER_INCREMENT_POST		1
 #define LAB3_ITER_DECREMENT_PRE			1
 #define LAB3_ITER_DECREMENT_POST		1
-#define LAB3_ITER_DEREFERENCE			0
+#define LAB3_ITER_DEREFERENCE			1
 #define LAB3_INSERT_EMPTY				0
 #define LAB3_INSERT_HEAD				0
 #define LAB3_INSERT_MIDDLE				0
@@ -210,6 +210,8 @@ public:
 		// Return: The data the curr is pointing to
 		Type& operator*() {
 			// TODO: Implement this method
+
+			return mCurr->data;
 		}
 
 		// Not-equal operator (used for testing)
