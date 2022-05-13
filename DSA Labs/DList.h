@@ -37,7 +37,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB_3	1
 
 // Individual unit test toggles
-#define LAB3_CTOR						0
+#define LAB3_CTOR						1
 #define LAB3_NODE_CTOR_DEFAULT			0
 #define LAB3_NODE_CTOR					0
 #define LAB3_ADDHEAD_EMPTY				0
@@ -220,7 +220,9 @@ public:
 	//		Creates a new empty linked list
 	DList() {
 		// TODO: Implement this method
-
+		mHead = nullptr;
+		mTail = nullptr;
+		mSize = 0;
 	}
 
 	// Destructor
