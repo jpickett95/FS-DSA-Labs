@@ -254,6 +254,7 @@ public:
 	// In:	_list			The object to copy from
 	DList(const DList& _copy)  {
 		// TODO: Implement this method
+		Clear();
 		*this = _copy;
 	}
 
@@ -337,10 +338,11 @@ private:
 	// In:	_curr		The current Node to clear
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
-
-			if (_curr != nullptr) // exit condition
-				RecursiveClear(_curr->next);
-			delete _curr;
+		if (_curr == nullptr);
+		if (_curr->next != nullptr) // exit condition
+			RecursiveClear(_curr->next);
+		delete _curr;
+		
 	}
 
 public:
