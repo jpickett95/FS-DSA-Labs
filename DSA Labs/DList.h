@@ -254,6 +254,8 @@ public:
 	// In:	_list			The object to copy from
 	DList(const DList& _copy)  {
 		// TODO: Implement this method
+		mHead = nullptr;
+		mTail = nullptr;
 		*this = _copy;
 	}
 
