@@ -60,8 +60,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ERASE_HEAD					1
 #define LAB3_ERASE_TAIL					1
 #define LAB3_ERASE_MIDDLE				1
-#define LAB3_ASSIGNMENT_OP				0
-#define LAB3_COPY_CTOR					0
+#define LAB3_ASSIGNMENT_OP				1
+#define LAB3_COPY_CTOR					1
 
 template<typename Type>
 class DList {
@@ -254,6 +254,7 @@ public:
 	// In:	_list			The object to copy from
 	DList(const DList& _copy)  {
 		// TODO: Implement this method
+		*this = _copy;
 	}
 
 	// Assignment operator
@@ -264,7 +265,12 @@ public:
 	//		This allows us to daisy-chain
 	DList& operator=(const DList& _assign) {
 		// TODO: Implement this method
+		if (this != &_assign) {
+			Clear(); // clear current object
+			RecursiveCopy(_assign.mHead);
 
+		}
+		return *this;
 	}
 
 private:
@@ -273,6 +279,11 @@ private:
 	// In:	_curr		The current Node to copy
 	void RecursiveCopy(const Node* _curr) {
 		// TODO (optional): Implement this method
+			if (_curr->next != nullptr)
+				RecursiveCopy(_curr->next);
+			else
+				AddHead(_curr->data);
+		
 	}
 
 public:
@@ -326,12 +337,10 @@ private:
 	// In:	_curr		The current Node to clear
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
-		if (_curr == nullptr);
-		else {
-			if (_curr->next != nullptr) // exit condition
+
+			if (_curr != nullptr) // exit condition
 				RecursiveClear(_curr->next);
 			delete _curr;
-		}
 	}
 
 public:
