@@ -46,7 +46,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ADDTAIL					1
 #define LAB3_CLEAR						1
 #define LAB3_DTOR						1
-#define LAB3_ITER_BEGIN					0
+#define LAB3_ITER_BEGIN					1
 #define LAB3_ITER_END					0
 #define LAB3_ITER_INCREMENT_PRE			1
 #define LAB3_ITER_INCREMENT_POST		1
@@ -392,6 +392,7 @@ public:
 	// Return: An iterator that has its curr pointing to the list's head
 	Iterator Begin() {
 		// TODO: Implement this method
+		
 	
 	}
 
@@ -400,6 +401,6 @@ public:
 	// Return: An iterator that has its curr pointing to a null pointer
 	Iterator End() {
 		// TODO: Implement this method
-
+		
 	}
 };
