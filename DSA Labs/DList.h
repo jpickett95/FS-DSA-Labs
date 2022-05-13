@@ -56,8 +56,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_INSERT_EMPTY				1
 #define LAB3_INSERT_HEAD				1
 #define LAB3_INSERT_MIDDLE				1
-#define LAB3_ERASE_EMPTY				0
-#define LAB3_ERASE_HEAD					0
+#define LAB3_ERASE_EMPTY				1
+#define LAB3_ERASE_HEAD					1
 #define LAB3_ERASE_TAIL					0
 #define LAB3_ERASE_MIDDLE				0
 #define LAB3_ASSIGNMENT_OP				0
@@ -141,11 +141,11 @@ public:
 		Iterator operator++(int) {
 			// TODO: Implement this method
 
-			Iterator* temp = new Iterator; 
-			temp->mCurr = mCurr;
+			Iterator temp; 
+			temp.mCurr = mCurr;
 			mCurr = mCurr->next;
-			return *temp;
-			delete temp;
+			return temp;
+
 		}
 
 		// Pre-fix decrement operator
@@ -198,11 +198,10 @@ public:
 		Iterator operator--(int) {
 			// TODO: Implement this method
 
-			Iterator* temp = new Iterator;
-			temp->mCurr = mCurr;
+			Iterator temp;
+			temp.mCurr = mCurr;
 			mCurr = mCurr->prev;
-			return *temp;
-			delete temp;
+			return temp;
 		}
 
 		// Dereference operator
@@ -396,7 +395,20 @@ public:
 	// NOTE:	The iterator should now be pointing at the node after the one erased
 	Iterator Erase(Iterator& _iter) {
 		// TODO: Implement this method
+		if (_iter.mCurr == nullptr) {
 
+		}
+		else if (_iter.mCurr == mHead) {
+			Iterator temp;
+			temp.mCurr = mHead->next;
+			delete mHead;
+			--mSize;
+			mHead = temp.mCurr;
+			mHead->prev = nullptr;
+			_iter.mCurr = mHead;
+		}
+
+		return _iter;
 	}
 
 	// Set an Iterator at the front of the list
