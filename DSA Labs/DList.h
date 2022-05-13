@@ -254,7 +254,6 @@ public:
 	// In:	_list			The object to copy from
 	DList(const DList& _copy)  {
 		// TODO: Implement this method
-		Clear();
 		*this = _copy;
 	}
 
@@ -269,7 +268,6 @@ public:
 		if (this != &_assign) {
 			Clear(); // clear current object
 			RecursiveCopy(_assign.mHead);
-
 		}
 		return *this;
 	}
@@ -280,11 +278,10 @@ private:
 	// In:	_curr		The current Node to copy
 	void RecursiveCopy(const Node* _curr) {
 		// TODO (optional): Implement this method
-			if (_curr->next != nullptr)
-				RecursiveCopy(_curr->next);
-			else
-				AddHead(_curr->data);
-		
+		if (_curr != nullptr) {
+			RecursiveCopy(_curr->next);
+			AddHead(_curr->data);
+		}
 	}
 
 public:
@@ -338,8 +335,7 @@ private:
 	// In:	_curr		The current Node to clear
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
-		if (_curr == nullptr);
-		if (_curr->next != nullptr) // exit condition
+		if (_curr != nullptr) // exit condition
 			RecursiveClear(_curr->next);
 		delete _curr;
 		
