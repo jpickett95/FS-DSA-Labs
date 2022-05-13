@@ -59,7 +59,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ERASE_EMPTY				1
 #define LAB3_ERASE_HEAD					1
 #define LAB3_ERASE_TAIL					1
-#define LAB3_ERASE_MIDDLE				0
+#define LAB3_ERASE_MIDDLE				1
 #define LAB3_ASSIGNMENT_OP				0
 #define LAB3_COPY_CTOR					0
 
@@ -395,10 +395,10 @@ public:
 	// NOTE:	The iterator should now be pointing at the node after the one erased
 	Iterator Erase(Iterator& _iter) {
 		// TODO: Implement this method
-		if (_iter.mCurr == nullptr) {
+		if (_iter.mCurr == nullptr) { // check if list is empty
 
 		}
-		else if (_iter.mCurr == mHead) {
+		else if (_iter.mCurr == mHead) { // check if pointing to head
 			Iterator temp;
 			temp.mCurr = mHead->next;
 			delete mHead;
@@ -407,7 +407,7 @@ public:
 			mHead->prev = nullptr;
 			_iter.mCurr = mHead;
 		}
-		else if (_iter.mCurr == mTail) {
+		else if (_iter.mCurr == mTail) { //check if pointing to tail
 			Iterator temp; 
 			temp.mCurr = mTail->prev;
 			delete mTail;
@@ -416,6 +416,15 @@ public:
 			mTail->prev = temp.mCurr->prev;
 			mTail->next = nullptr;
 			_iter.mCurr = mTail->next;
+		}
+		else {
+			_iter.mCurr->prev->next = _iter.mCurr->next;
+			_iter.mCurr->next->prev = _iter.mCurr->prev;
+			Iterator temp;
+			temp.mCurr = _iter.mCurr->next;
+			delete _iter.mCurr;
+			--mSize;
+			_iter.mCurr = temp.mCurr;
 		}
 
 		return _iter;
