@@ -58,7 +58,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_INSERT_MIDDLE				1
 #define LAB3_ERASE_EMPTY				1
 #define LAB3_ERASE_HEAD					1
-#define LAB3_ERASE_TAIL					0
+#define LAB3_ERASE_TAIL					1
 #define LAB3_ERASE_MIDDLE				0
 #define LAB3_ASSIGNMENT_OP				0
 #define LAB3_COPY_CTOR					0
@@ -326,8 +326,8 @@ private:
 	// In:	_curr		The current Node to clear
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
-		
-		if (_curr != nullptr) { // check if _curr is nullptr
+		if (_curr == nullptr);
+		else {
 			if (_curr->next != nullptr) // exit condition
 				RecursiveClear(_curr->next);
 			delete _curr;
@@ -406,6 +406,16 @@ public:
 			mHead = temp.mCurr;
 			mHead->prev = nullptr;
 			_iter.mCurr = mHead;
+		}
+		else if (_iter.mCurr == mTail) {
+			Iterator temp; 
+			temp.mCurr = mTail->prev;
+			delete mTail;
+			--mSize;
+			mTail = temp.mCurr;
+			mTail->prev = temp.mCurr->prev;
+			mTail->next = nullptr;
+			_iter.mCurr = mTail->next;
 		}
 
 		return _iter;
