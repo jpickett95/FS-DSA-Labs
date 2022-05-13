@@ -51,7 +51,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ITER_INCREMENT_PRE			1
 #define LAB3_ITER_INCREMENT_POST		1
 #define LAB3_ITER_DECREMENT_PRE			1
-#define LAB3_ITER_DECREMENT_POST		0
+#define LAB3_ITER_DECREMENT_POST		1
 #define LAB3_ITER_DEREFERENCE			0
 #define LAB3_INSERT_EMPTY				0
 #define LAB3_INSERT_HEAD				0
@@ -145,6 +145,7 @@ public:
 			temp->mCurr = mCurr;
 			mCurr = mCurr->next;
 			return *temp;
+			delete temp;
 		}
 
 		// Pre-fix decrement operator
@@ -196,6 +197,12 @@ public:
 		*/
 		Iterator operator--(int) {
 			// TODO: Implement this method
+
+			Iterator* temp = new Iterator;
+			temp->mCurr = mCurr;
+			mCurr = mCurr->prev;
+			return *temp;
+			delete temp;
 		}
 
 		// Dereference operator
