@@ -44,7 +44,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB3_ADDHEAD					1
 #define LAB3_ADDTAIL_EMPTY				1
 #define LAB3_ADDTAIL					1
-#define LAB3_CLEAR						0
+#define LAB3_CLEAR						1
 #define LAB3_DTOR						0
 #define LAB3_ITER_BEGIN					0
 #define LAB3_ITER_END					0
@@ -294,7 +294,13 @@ public:
 	//			Resets the list to its default state
 	void Clear() {
 		// TODO: Implement this method
-		
+
+		RecursiveClear(mHead);
+
+		// reset data members
+		mHead = nullptr;
+		mTail = nullptr;
+		mSize = 0;
 	}
 
 private:
@@ -304,6 +310,9 @@ private:
 	void RecursiveClear(const Node* _curr) {
 		// TODO (Optional): Implement this method
 
+		if (_curr->next != nullptr) // exit condition
+			RecursiveClear(_curr->next);
+		delete _curr;
 	}
 
 public:
