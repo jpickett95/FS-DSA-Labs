@@ -37,7 +37,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB_5	1
 
 // Individual unit test toggles
-#define LAB5_PAIR_CTOR				0
+#define LAB5_PAIR_CTOR				1
 #define LAB5_CTOR					0
 #define LAB5_DTOR					0
 #define LAB5_CLEAR					0
@@ -69,7 +69,8 @@ class Dictionary {
 		// In:	_key
 		//		_value
 		Pair(const Key& _key, const Value& _value) {
-
+			key = _key;
+			value = _value;
 		}
 
 		// For testing
