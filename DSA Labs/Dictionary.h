@@ -141,7 +141,9 @@ public:
 	// NOTE:	If there is already an item at the provided key, overwrite it.
 	void Insert(const Key& _key, const Value& _value) {
 		// TODO: Implement this method
+		int bucket = mHashFunc(_key);
 		
+		mTable[bucket].push_back(Pair(_key, _value));
 	}
 
 	// Find a value at a specified key
