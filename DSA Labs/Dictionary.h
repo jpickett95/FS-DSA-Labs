@@ -38,7 +38,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define LAB5_PAIR_CTOR				1
-#define LAB5_CTOR					0
+#define LAB5_CTOR					1
 #define LAB5_DTOR					0
 #define LAB5_CLEAR					0
 #define LAB5_INSERT_NEW				0
@@ -94,7 +94,9 @@ public:
 	//		_hashFunc			The hashing function to be used
 	Dictionary(size_t _numBuckets, unsigned int (*_hashFunc)(const Key&)) {
 		// TODO: Implement this method
-
+		mNumBuckets = _numBuckets;
+		mHashFunc = _hashFunc;
+		mTable = new std::list<Pair>[mNumBuckets];
 	}
 
 	// Destructor
