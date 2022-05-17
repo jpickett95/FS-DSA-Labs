@@ -42,7 +42,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_DTOR					1
 #define LAB5_CLEAR					1
 #define LAB5_INSERT_NEW				1
-#define LAB5_INSERT_EXISTING		0
+#define LAB5_INSERT_EXISTING		1
 #define LAB5_FIND					0
 #define LAB5_FIND_NOT_FOUND			0
 #define LAB5_REMOVE					0
@@ -142,8 +142,11 @@ public:
 	void Insert(const Key& _key, const Value& _value) {
 		// TODO: Implement this method
 		int bucket = mHashFunc(_key);
-		
-		mTable[bucket].push_back(Pair(_key, _value));
+		(for auto iter = mTable[bucket].begin(); iter != mTable[bucket].end(); ++iter)
+			if (iter.key == _key)
+				mTable[bucket].emplace(iter, Pair(_key, _value));
+			else
+				mTable[bucket].push_back(Pair(_key, _value));
 	}
 
 	// Find a value at a specified key
