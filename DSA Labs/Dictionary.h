@@ -40,7 +40,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_PAIR_CTOR				1
 #define LAB5_CTOR					1
 #define LAB5_DTOR					1
-#define LAB5_CLEAR					0
+#define LAB5_CLEAR					1
 #define LAB5_INSERT_NEW				0
 #define LAB5_INSERT_EXISTING		0
 #define LAB5_FIND					0
@@ -130,7 +130,8 @@ public:
 	//  NOTE:	Does not delete table or reset hash function
 	void Clear() {
 		// TODO: Implement this method
-
+		for (int i = 0; i < mNumBuckets; ++i)
+			mTable[i].clear();
 	}
 
 	// Insert an item into the table
@@ -140,7 +141,7 @@ public:
 	// NOTE:	If there is already an item at the provided key, overwrite it.
 	void Insert(const Key& _key, const Value& _value) {
 		// TODO: Implement this method
-
+		
 	}
 
 	// Find a value at a specified key
