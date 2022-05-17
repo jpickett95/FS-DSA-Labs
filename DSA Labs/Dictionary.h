@@ -142,7 +142,6 @@ public:
 	void Insert(const Key& _key, const Value& _value) {
 		// TODO: Implement this method
 		int bucket = mHashFunc(_key);
-		bool isThere = false;
 		auto iter = mTable[bucket].begin();
 		for (iter; iter != mTable[bucket].end();)
 			if (iter->key == _key) {
