@@ -47,7 +47,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_FIND_NOT_FOUND			1
 #define LAB5_REMOVE					1
 #define LAB5_REMOVE_NOT_FOUND		1
-#define LAB5_ASSIGNMENT_OP			0
+#define LAB5_ASSIGNMENT_OP			1
 #define LAB5_COPY_CTOR				0
 
 /************/
@@ -122,7 +122,16 @@ public:
 	//		This allows us to daisy-chain
 	Dictionary& operator=(const Dictionary& _assign) {
 		// TODO: Implement this method
-	
+		if (this != &_assign) {
+			mNumBuckets = _assign.mNumBuckets;
+			mHashFunc = _assign.mHashFunc;
+			delete[] mTable;
+			mTable = new std::list<Pair>[mNumBuckets];
+			for (int bucket = 0; bucket < mNumBuckets; ++bucket)
+				for (auto iter = _assign.mTable[bucket].begin(); iter != _assign.mTable[bucket].end(); ++iter)
+					mTable[bucket].push_back(Pair(iter->key, iter->value));
+		}
+		return *this;
 	}
 
 	// Clear
