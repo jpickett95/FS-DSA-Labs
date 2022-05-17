@@ -48,7 +48,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_REMOVE					1
 #define LAB5_REMOVE_NOT_FOUND		1
 #define LAB5_ASSIGNMENT_OP			1
-#define LAB5_COPY_CTOR				0
+#define LAB5_COPY_CTOR				1
 
 /************/
 /* Includes */
@@ -111,7 +111,8 @@ public:
 	// In:	_copy				The object to copy from
 	Dictionary(const Dictionary& _copy) {
 		// TODO: Implement this method
-
+		mTable = nullptr;
+		*this = _copy;
 	}
 
 	// Assignment operator
