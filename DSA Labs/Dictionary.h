@@ -41,7 +41,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_CTOR					1
 #define LAB5_DTOR					1
 #define LAB5_CLEAR					1
-#define LAB5_INSERT_NEW				0
+#define LAB5_INSERT_NEW				1
 #define LAB5_INSERT_EXISTING		0
 #define LAB5_FIND					0
 #define LAB5_FIND_NOT_FOUND			0
