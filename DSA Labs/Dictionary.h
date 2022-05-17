@@ -142,11 +142,17 @@ public:
 	void Insert(const Key& _key, const Value& _value) {
 		// TODO: Implement this method
 		int bucket = mHashFunc(_key);
-		(for auto iter = mTable[bucket].begin(); iter != mTable[bucket].end(); ++iter)
-			if (iter.key == _key)
-				mTable[bucket].emplace(iter, Pair(_key, _value));
+		bool isThere = false;
+		auto iter = mTable[bucket].begin();
+		for (iter; iter != mTable[bucket].end();)
+			if (iter->key == _key) {
+				iter->value = _value;
+				break;
+			}
 			else
-				mTable[bucket].push_back(Pair(_key, _value));
+				++iter;
+		if(iter == mTable[bucket].end())
+			mTable[bucket].push_back(Pair(_key, _value));
 	}
 
 	// Find a value at a specified key
