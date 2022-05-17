@@ -45,8 +45,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB5_INSERT_EXISTING		1
 #define LAB5_FIND					1
 #define LAB5_FIND_NOT_FOUND			1
-#define LAB5_REMOVE					0
-#define LAB5_REMOVE_NOT_FOUND		0
+#define LAB5_REMOVE					1
+#define LAB5_REMOVE_NOT_FOUND		1
 #define LAB5_ASSIGNMENT_OP			0
 #define LAB5_COPY_CTOR				0
 
@@ -178,7 +178,17 @@ public:
 	// Return: True, if an item was removed
 	bool Remove(const Key& _key) {
 		// TODO: Implement this method
-
+		bool wasRemoved = false;
+		int bucket = mHashFunc(_key);
+		auto iter = mTable[bucket].begin();
+		for (iter; iter != mTable[bucket].end();)
+			if (iter->key == _key) {
+				iter = mTable[bucket].erase(iter);
+				wasRemoved = true;
+			}
+			else
+				++iter;
+		return wasRemoved;
 	}
 	
 };
