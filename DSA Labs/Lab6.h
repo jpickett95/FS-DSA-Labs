@@ -121,5 +121,6 @@ public:
 	int FindValueInMap(const std::string& _word) {
 		// TODO: Implement this method
 
+		return 0;
 	}
 };
