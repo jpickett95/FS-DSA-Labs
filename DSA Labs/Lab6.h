@@ -37,12 +37,12 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB_6	1
 
 // Individual unit test toggles
-#define LAB6_POPULATE_LETTER_VALUES	0
+#define LAB6_POPULATE_LETTER_VALUES	1
 #define LAB6_GET_LETTER_VALUE		0
 #define LAB6_GET_WORD_VALUE			0
 #define LAB6_CREATE_PAIR			0
 #define LAB6_LOAD_FILE				0
-#define LAB6_FIND_WORD_SCORE		0
+#define LAB6_FIND_WORD_SCORE		1
 
 /************/
 /* Includes */
@@ -67,7 +67,8 @@ public:
 	// In:	_letterValues		The array of 26 values
 	void PopulateLetterValues(const int* _letterValues) {
 		// TODO: Implement this method
-
+		for (int i = 0; i < 26; ++i)
+			mLetterValues[i] = _letterValues[i];
 	}
 
 	// Retrieve the value of a particular letter
