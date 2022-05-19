@@ -39,7 +39,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 // Individual unit test toggles
 #define LAB6_POPULATE_LETTER_VALUES	1
 #define LAB6_GET_LETTER_VALUE		1
-#define LAB6_GET_WORD_VALUE			0
+#define LAB6_GET_WORD_VALUE			1
 #define LAB6_CREATE_PAIR			0
 #define LAB6_LOAD_FILE				0
 #define LAB6_FIND_WORD_SCORE		1
@@ -90,7 +90,10 @@ public:
 	// Return: The total value of the word
 	int GetWordValue(const std::string& _word) const {
 		// TODO: Implement this method
-
+		int totalValue = 0;
+		for (auto iter = _word.begin(); iter != _word.end(); ++iter)
+			totalValue += GetLetterValue(*iter);
+		return totalValue;
 	}
 
 	// Create a pair to add into the scrabbleMap
