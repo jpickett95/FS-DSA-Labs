@@ -38,7 +38,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define LAB6_POPULATE_LETTER_VALUES	1
-#define LAB6_GET_LETTER_VALUE		0
+#define LAB6_GET_LETTER_VALUE		1
 #define LAB6_GET_WORD_VALUE			0
 #define LAB6_CREATE_PAIR			0
 #define LAB6_LOAD_FILE				0
@@ -79,7 +79,7 @@ public:
 	// NOTE:	The letter passed in will always be upper-case
 	int GetLetterValue(char _letter) const {
 		// TODO: Implement this method
-
+		return mLetterValues[_letter - 'A'];
 	}
 
 	// Get the value of a word
