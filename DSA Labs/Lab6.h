@@ -41,7 +41,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB6_GET_LETTER_VALUE		1
 #define LAB6_GET_WORD_VALUE			1
 #define LAB6_CREATE_PAIR			1
-#define LAB6_LOAD_FILE				0
+#define LAB6_LOAD_FILE				1
 #define LAB6_FIND_WORD_SCORE		1
 
 /************/
@@ -114,7 +114,13 @@ public:
 	// Note: You may want to use one or more existing methods to help.
 	void LoadWords(const char* _filename) {
 		// TODO: Implement this method
-
+		std::ifstream ifl(_filename);
+		while (!ifl.eof()) {
+			std::string word;
+			std::getline(ifl, word);
+			mScrabbleMap.insert(CreatePair(word));
+		}
+		ifl.close();
 	}
 
 	// Searches for a word in the map, and retrieves the score for that word
