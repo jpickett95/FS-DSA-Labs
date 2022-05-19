@@ -40,7 +40,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB6_POPULATE_LETTER_VALUES	1
 #define LAB6_GET_LETTER_VALUE		1
 #define LAB6_GET_WORD_VALUE			1
-#define LAB6_CREATE_PAIR			0
+#define LAB6_CREATE_PAIR			1
 #define LAB6_LOAD_FILE				0
 #define LAB6_FIND_WORD_SCORE		1
 
@@ -104,7 +104,7 @@ public:
 	// Return: A pair that contains the word and the total score
 	std::pair<std::string, int> CreatePair(const std::string& _word) const {
 		// TODO: Implement this method
-
+		return std::pair<std::string, int>(_word, GetWordValue(_word));
 	}
 
 	// Load a file containing all of the possible scrabble words, along with their values
