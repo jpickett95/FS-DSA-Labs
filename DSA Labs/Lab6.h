@@ -130,7 +130,10 @@ public:
 	// Return: The word score for _word (or -1 if not found)
 	int FindValueInMap(const std::string& _word) {
 		// TODO: Implement this method
-
-		return 0;
+		auto iter = mScrabbleMap.find(_word);
+		if (iter != mScrabbleMap.end())
+			return iter->second;
+		else
+			return -1;
 	}
 };
