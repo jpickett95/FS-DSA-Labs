@@ -56,12 +56,12 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_REMOVE_CASE0_ROOT					1
 #define BST_REMOVE_CASE0_LEFT					1
 #define BST_REMOVE_CASE0_RIGHT					1
-#define BST_REMOVE_CASE1_ROOT_LEFT				0
-#define BST_REMOVE_CASE1_ROOT_RIGHT				0
-#define BST_REMOVE_CASE1_LEFT_LEFT				0
-#define BST_REMOVE_CASE1_LEFT_RIGHT				0
-#define BST_REMOVE_CASE1_RIGHT_LEFT				0
-#define BST_REMOVE_CASE1_RIGHT_RIGHT			0
+#define BST_REMOVE_CASE1_ROOT_LEFT				1
+#define BST_REMOVE_CASE1_ROOT_RIGHT				1
+#define BST_REMOVE_CASE1_LEFT_LEFT				1
+#define BST_REMOVE_CASE1_LEFT_RIGHT				1
+#define BST_REMOVE_CASE1_RIGHT_LEFT				1
+#define BST_REMOVE_CASE1_RIGHT_RIGHT			1
 #define BST_REMOVE_CASE2_CASE0					0
 #define BST_REMOVE_CASE2_CASE1					0
 #define BST_REMOVE_CASE0						0
@@ -286,7 +286,42 @@ private:
 	// In:	_node		The node to remove
 	void RemoveCase1(Node* _node) {
 		// TODO: Implement this method
-
+		if (_node == mRoot) {
+			if (_node->left != nullptr) {
+				mRoot = _node->left;
+				mRoot->parent = nullptr;
+				delete _node;
+			}
+			else {
+				mRoot = _node->right;
+				mRoot->parent = nullptr;
+				delete _node;
+			}
+		}
+		else if (_node == _node->parent->left) {
+			if (_node->left != nullptr) {
+				_node->parent->left = _node->left;
+				_node->left->parent = _node->parent;
+				delete _node;
+			}
+			else {
+				_node->parent->left = _node->right;
+				_node->right->parent = _node->parent;
+				delete _node;
+			}
+		}
+		else if (_node == _node->parent->right) {
+			if (_node->left != nullptr) {
+				_node->parent->right = _node->left;
+				_node->left->parent = _node->parent;
+				delete _node;
+			}
+			else {
+				_node->parent->right = _node->right;
+				_node->right->parent = _node->parent;
+				delete _node;
+			}
+		}
 	}
 
 	// Remove a node from the tree that has both children
