@@ -42,7 +42,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB_7	1
 
 // Individual unit test toggles
-#define BST_CTOR								0
+#define BST_CTOR								1
 #define BST_NODE_CTOR							0
 #define BST_PUSH_EMPTY							0
 #define BST_PUSH_ROOT_LEFT						0
@@ -105,7 +105,7 @@ public:
 	//			Always creates an empty tree
 	BST() {
 		// TODO: Implement this method
-
+		mRoot = nullptr;
 	}
 
 	// Destructor
