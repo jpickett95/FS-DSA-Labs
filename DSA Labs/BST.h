@@ -44,7 +44,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 // Individual unit test toggles
 #define BST_CTOR								1
 #define BST_NODE_CTOR							1
-#define BST_PUSH_EMPTY							0
+#define BST_PUSH_EMPTY							1
 #define BST_PUSH_ROOT_LEFT						0
 #define BST_PUSH_ROOT_RIGHT						0
 #define BST_PUSH_LEFT							0
@@ -53,7 +53,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_DTOR								0
 #define BST_CONTAINS_FOUND						0
 #define BST_CONTAINS_NOTFOUND					0
-#define BST_REMOVE_CASE0_ROOT					0
+#define BST_REMOVE_CASE0_ROOT					1
 #define BST_REMOVE_CASE0_LEFT					0
 #define BST_REMOVE_CASE0_RIGHT					0
 #define BST_REMOVE_CASE1_ROOT_LEFT				0
@@ -178,7 +178,16 @@ public:
 	// In:	_val			The value to add
 	void Push(const Type& _val) {
 		// TODO: Implement this method
+		Node* newNode = new Node(_val);
+		if (mRoot == nullptr) {
+			mRoot = newNode;
+			return;
+		}
+		//else {
+			//Node temp = mRoot;
+			//if(newNode->data < temp->data)
 
+		//}
 	}
 
 private:
@@ -220,7 +229,10 @@ private:
 	// In:	_node		The node to remove
 	void RemoveCase0(Node* _node) {
 		// TODO: Implement this method
-
+		if (_node == mRoot) {
+			delete _node;
+			mRoot = nullptr;
+		}
 	}
 
 	// Remove a node from the tree that has only one child
