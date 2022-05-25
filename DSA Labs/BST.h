@@ -51,8 +51,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_PUSH_RIGHT							1
 #define BST_CLEAR								0
 #define BST_DTOR								0
-#define BST_CONTAINS_FOUND						0
-#define BST_CONTAINS_NOTFOUND					0
+#define BST_CONTAINS_FOUND						1
+#define BST_CONTAINS_NOTFOUND					1
 #define BST_REMOVE_CASE0_ROOT					1
 #define BST_REMOVE_CASE0_LEFT					0
 #define BST_REMOVE_CASE0_RIGHT					0
@@ -231,7 +231,10 @@ public:
 	// Return:	True, if found
 	bool Contains(const Type& _val) {
 		// TODO: Implement this method
-
+		if (FindNode(_val) != nullptr)
+			return true;
+		else
+			return false;
 	}
 
 private:
@@ -242,7 +245,19 @@ private:
 	//
 	// Return: The node containing _val (or nullptr if not found)
 	Node* FindNode(const Type& _val) {
-		
+		Node* temp = mRoot;
+		while (temp != nullptr) {
+			if (_val < temp->data) {
+				temp = temp->left;
+				continue;
+			}
+			else if (_val > temp->data) {
+				temp = temp->right;
+				continue;
+			}
+			else if (_val == temp->data)
+				return temp;
+		}
 	}
 
 	// Remove a leaf node from the tree
