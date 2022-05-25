@@ -43,7 +43,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define BST_CTOR								1
-#define BST_NODE_CTOR							0
+#define BST_NODE_CTOR							1
 #define BST_PUSH_EMPTY							0
 #define BST_PUSH_ROOT_LEFT						0
 #define BST_PUSH_ROOT_RIGHT						0
@@ -91,7 +91,9 @@ class BST {
 		//		_parent		The parent pointer (optional)
 		Node(const Type& _data, Node* _parent = nullptr) {
 			// TODO: Implement this method
-
+			data = _data;
+			parent = _parent;
+			left = right = nullptr;
 		}
 	};
 
