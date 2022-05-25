@@ -68,7 +68,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_REMOVE_CASE1						1
 #define BST_REMOVE_CASE2						1
 #define BST_REMOVE_NOT_FOUND					1
-#define BST_IN_ORDER_TRAVERSAL					0
+#define BST_IN_ORDER_TRAVERSAL					1
 #define BST_ASSIGNMENT_OP						0
 #define BST_COPY_CTOR							0
 
@@ -387,7 +387,6 @@ public:
 	std::string InOrder() {
 		// TODO: Implement this method
 
-		return "";
 	}
 
 private:
