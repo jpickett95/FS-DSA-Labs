@@ -54,8 +54,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_CONTAINS_FOUND						1
 #define BST_CONTAINS_NOTFOUND					1
 #define BST_REMOVE_CASE0_ROOT					1
-#define BST_REMOVE_CASE0_LEFT					0
-#define BST_REMOVE_CASE0_RIGHT					0
+#define BST_REMOVE_CASE0_LEFT					1
+#define BST_REMOVE_CASE0_RIGHT					1
 #define BST_REMOVE_CASE1_ROOT_LEFT				0
 #define BST_REMOVE_CASE1_ROOT_RIGHT				0
 #define BST_REMOVE_CASE1_LEFT_LEFT				0
@@ -269,6 +269,14 @@ private:
 		if (_node == mRoot) {
 			delete _node;
 			mRoot = nullptr;
+		}
+		else if (_node == _node->parent->left) {
+			_node->parent->left = nullptr;
+			delete _node;
+		}
+		else if (_node == _node->parent->right) {
+			_node->parent->right = nullptr;
+			delete _node;
 		}
 	}
 
