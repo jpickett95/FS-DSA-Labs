@@ -64,10 +64,10 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_REMOVE_CASE1_RIGHT_RIGHT			1
 #define BST_REMOVE_CASE2_CASE0					1
 #define BST_REMOVE_CASE2_CASE1					1
-#define BST_REMOVE_CASE0						0
-#define BST_REMOVE_CASE1						0
-#define BST_REMOVE_CASE2						0
-#define BST_REMOVE_NOT_FOUND					0
+#define BST_REMOVE_CASE0						1
+#define BST_REMOVE_CASE1						1
+#define BST_REMOVE_CASE2						1
+#define BST_REMOVE_NOT_FOUND					1
 #define BST_IN_ORDER_TRAVERSAL					0
 #define BST_ASSIGNMENT_OP						0
 #define BST_COPY_CTOR							0
@@ -355,7 +355,21 @@ public:
 	//			C) 1 child
 	bool Remove(const Type& _val) {
 		// TODO: Implement this method
-
+		Node* node = FindNode(_val);
+		if (node == nullptr)
+			return false;
+		else if (node->left == nullptr && node->right == nullptr) {
+			RemoveCase0(node);
+			return true;
+		}
+		else if ((node->left != nullptr && node->right == nullptr) || (node->left == nullptr && node->right != nullptr)) {
+			RemoveCase1(node);
+			return true;
+		}
+		else if (node->left != nullptr && node->right != nullptr) {
+			RemoveCase2(node);
+			return true;
+		}
 	}
 
 	// Returns a space-delimited string of the tree in order
