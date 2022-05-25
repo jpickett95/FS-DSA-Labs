@@ -62,8 +62,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_REMOVE_CASE1_LEFT_RIGHT				1
 #define BST_REMOVE_CASE1_RIGHT_LEFT				1
 #define BST_REMOVE_CASE1_RIGHT_RIGHT			1
-#define BST_REMOVE_CASE2_CASE0					0
-#define BST_REMOVE_CASE2_CASE1					0
+#define BST_REMOVE_CASE2_CASE0					1
+#define BST_REMOVE_CASE2_CASE1					1
 #define BST_REMOVE_CASE0						0
 #define BST_REMOVE_CASE1						0
 #define BST_REMOVE_CASE2						0
@@ -256,8 +256,9 @@ private:
 				continue;
 			}
 			else if (_val == temp->data)
-				return temp;
+				break;
 		}
+		return temp;
 	}
 
 	// Remove a leaf node from the tree
