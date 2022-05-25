@@ -45,8 +45,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_CTOR								1
 #define BST_NODE_CTOR							1
 #define BST_PUSH_EMPTY							1
-#define BST_PUSH_ROOT_LEFT						0
-#define BST_PUSH_ROOT_RIGHT						0
+#define BST_PUSH_ROOT_LEFT						1
+#define BST_PUSH_ROOT_RIGHT						1
 #define BST_PUSH_LEFT							0
 #define BST_PUSH_RIGHT							0
 #define BST_CLEAR								0
@@ -183,11 +183,24 @@ public:
 			mRoot = newNode;
 			return;
 		}
-		//else {
-			//Node temp = mRoot;
-			//if(newNode->data < temp->data)
+		else {
+			Node* temp = mRoot;
+			//while (temp)
+				if (newNode->data < temp->data) {
+					if (temp->left == nullptr) {
+						temp->left = newNode;
+						newNode->parent = temp;
+						return;
+					}
+				}
+				else if(newNode->data > temp->data)
+					if (temp->right == nullptr) {
+						temp->right = newNode;
+						newNode->parent = temp;
+						return;
+					}
 
-		//}
+		}
 	}
 
 private:
