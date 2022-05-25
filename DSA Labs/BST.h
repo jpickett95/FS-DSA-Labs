@@ -331,7 +331,15 @@ private:
 	// In:	_node		The node to remove
 	void RemoveCase2(Node* _node) {
 		// TODO: Implement this method
-
+		Node* min = _node->right;
+		while (min->left != nullptr) {
+			min = min->left;
+		}
+		_node->data = min->data;
+		if (min->left == nullptr && min->right == nullptr)
+			RemoveCase0(min);
+		else
+			RemoveCase1(min);
 	}
 
 public:
