@@ -39,7 +39,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 */
 
 // Main toggle
-#define LAB_8 0
+#define LAB_8 1
 
 // Individual unit test toggles
 #define HUFFMAN_CTOR					0
