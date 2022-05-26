@@ -69,8 +69,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_REMOVE_CASE2						1
 #define BST_REMOVE_NOT_FOUND					1
 #define BST_IN_ORDER_TRAVERSAL					1
-#define BST_ASSIGNMENT_OP						0
-#define BST_COPY_CTOR							0
+#define BST_ASSIGNMENT_OP						1
+#define BST_COPY_CTOR							1
 
 
 // Templated binary search tree
@@ -123,7 +123,8 @@ public:
 		// In:	_copy		The object to copy from
 	BST(const BST& _copy) {
 		// TODO: Implement this method
-
+		mRoot = nullptr;
+		*this = _copy;
 	}
 
 	// Assignment operator
@@ -135,7 +136,11 @@ public:
 	//		This allows us to daisy-chain
 	BST& operator=(const BST& _assign) {
 		// TODO: Implement this method
-		
+		if (this != &_assign) {
+			Clear();
+			Copy(_assign.mRoot);
+		}
+		return *this;
 	}
 
 private:
@@ -375,6 +380,7 @@ public:
 			RemoveCase2(node);
 			return true;
 		}
+		return false;
 	}
 
 	// Returns a space-delimited string of the tree in order
