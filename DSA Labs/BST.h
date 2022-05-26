@@ -49,8 +49,8 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define BST_PUSH_ROOT_RIGHT						1
 #define BST_PUSH_LEFT							1
 #define BST_PUSH_RIGHT							1
-#define BST_CLEAR								0
-#define BST_DTOR								0
+#define BST_CLEAR								1
+#define BST_DTOR								1
 #define BST_CONTAINS_FOUND						1
 #define BST_CONTAINS_NOTFOUND					1
 #define BST_REMOVE_CASE0_ROOT					1
@@ -114,7 +114,7 @@ public:
 	//			Clear all dynamic memory
 	~BST() {
 		// TODO: Implement this method
-
+		Clear();
 	}
 
 	// Copy constructor
@@ -157,7 +157,8 @@ public:
 	// Clears out the tree and readies it for re-use
 	void Clear() {
 		// TODO: Implement this method
-
+		Clear(mRoot);
+		mRoot = nullptr;
 	}
 
 private:
@@ -168,7 +169,11 @@ private:
 	//
 	// NOTE:	Use post-order traversal
 	void Clear(Node* _curr) {
-		
+		if (_curr != nullptr) {
+			Clear(_curr->left);
+			Clear(_curr->right);
+			delete _curr;
+		}
 	}
 
 public:
@@ -386,7 +391,10 @@ public:
 
 	std::string InOrder() {
 		// TODO: Implement this method
-
+		std::string treeVals;
+		InOrder(mRoot, treeVals);
+		treeVals.pop_back();
+		return treeVals;
 	}
 
 private:
@@ -399,7 +407,12 @@ private:
 	// NOTE:	Use in-order traversal
 	// NOTE:	Use to_string to convert an int to its string equivelent
 	void InOrder(Node* _curr, std::string& _str) {
-		
+		if (_curr != nullptr) {
+			InOrder(_curr->left, _str);
+			_str += std::to_string(_curr->data);
+			_str += " ";
+			InOrder(_curr->right, _str);
+		}
 	}
 };
 
