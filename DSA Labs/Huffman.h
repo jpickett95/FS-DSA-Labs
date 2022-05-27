@@ -43,10 +43,10 @@ NOTE: If the unit test is not on, that code will not be compiled!
 
 // Individual unit test toggles
 #define HUFFMAN_CTOR					1
-#define HUFFMAN_GENERATE_FREQUENCY		0
-#define HUFFMAN_GENERATE_LEAFLIST		0
+#define HUFFMAN_GENERATE_FREQUENCY		1
+#define HUFFMAN_GENERATE_LEAFLIST		1
 #define HUFFMAN_GENERATE_TREE			0
-#define HUFFMAN_CLEAR_TREE				0
+#define HUFFMAN_CLEAR_TREE				1
 #define HUFFMAN_DTOR					0
 #define HUFFMAN_GENERATE_ENCODING		0
 #define HUFFMAN_COMPRESS				0
@@ -139,14 +139,19 @@ class Huffman {
 	void GenerateFrequencyTable() {
 
 		// 1. Open the file in binary mode	
+		std::ifstream ifl(mFileName, std::ios::binary);
 		
 		// 2. Get the total count of the file	(This can also be done in the next step instead)
 
 		// 3. Read the file one byte at a time, and increment the corresponding index
-		
+		char c;
+		while (ifl.get(c)) {
+			for (unsigned int i = 0; i < 256; ++i)
+				if ((unsigned char)c == i)
+					mFrequencyTable[i]++;
+		}
 		// 4. Close the file when complete
-		
-
+		ifl.close();
 	}
 
 	// Generate the leaf list for the Huffman algorithm (used in READ AND WRITE)
@@ -155,7 +160,11 @@ class Huffman {
 	void GenerateLeafList() {
 		// 1. Iterate through the frequency table (for all ASCII values) and dynamically create a leaf node for each non-0
 		// frequency. Add it to the mLeafList vector.
-		
+		for(int i = 0; i < 256; ++i)
+			if (mFrequencyTable[i] != 0) {
+				HuffNode* node = new HuffNode(i, mFrequencyTable[i]);
+				mLeafList.push_back(node);
+			}
 	}
 
 	// Generate a Huffman tree
@@ -193,7 +202,8 @@ class Huffman {
 	// Clear the tree of all dynamic memory (by using the helper function)
 	void ClearTree() {
 		// 1. Call the helper function with the root and then set it back to null
-	
+		ClearTree(mRoot);
+		mRoot = nullptr;
 	}
 
 	// Clear the tree of all dynamic memory (recursive helper function)
@@ -203,7 +213,11 @@ class Huffman {
 	// Note:	This will be a recursive function that does a post-order deletion
 	void ClearTree(HuffNode* _curr) {
 		// 1. Implement this method
-	
+		if (_curr != nullptr) {
+			ClearTree(_curr->left);
+			ClearTree(_curr->right);
+			delete _curr;
+		}
 	}
 
 	// Write a Huffman compressed file to disk
