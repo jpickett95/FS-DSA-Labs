@@ -42,7 +42,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define LAB_8 1
 
 // Individual unit test toggles
-#define HUFFMAN_CTOR					0
+#define HUFFMAN_CTOR					1
 #define HUFFMAN_GENERATE_FREQUENCY		0
 #define HUFFMAN_GENERATE_LEAFLIST		0
 #define HUFFMAN_GENERATE_TREE			0
@@ -112,11 +112,14 @@ class Huffman {
 	// In:	_fileName		The name of the file to open
 	Huffman(const std::string& _fileName) {
 		// 1. Assign the data members the values from the parameters
+		mFileName = _fileName;
 		
 		// 2. Zero out the frequency table
+		for (int i = 0; i < 256; ++i)
+			mFrequencyTable[i] = 0;
 		
 		// 3. Set the root to null
-
+		mRoot = nullptr;
 	}
 
 	// Destructor
