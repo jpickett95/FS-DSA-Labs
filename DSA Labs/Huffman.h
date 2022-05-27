@@ -45,9 +45,9 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define HUFFMAN_CTOR					1
 #define HUFFMAN_GENERATE_FREQUENCY		1
 #define HUFFMAN_GENERATE_LEAFLIST		1
-#define HUFFMAN_GENERATE_TREE			0
+#define HUFFMAN_GENERATE_TREE			1
 #define HUFFMAN_CLEAR_TREE				1
-#define HUFFMAN_DTOR					0
+#define HUFFMAN_DTOR					1
 #define HUFFMAN_GENERATE_ENCODING		0
 #define HUFFMAN_COMPRESS				0
 #define HUFFMAN_DECOMPRESS				0
@@ -126,7 +126,7 @@ class Huffman {
 	//		Needs to clean up any left-over dynamic memory in tree
 	~Huffman() {
 		// 1. Clear out the tree
-
+		ClearTree();
 	}
 
 
@@ -172,8 +172,11 @@ class Huffman {
 		// 1. Create the priority queue
 		//              This will be storing HuffNode*'s
 		//              in a vector, and will be using the HuffCompare for comparison
+		std::priority_queue<HuffNode*, std::vector<HuffNode*>, HuffCompare> priority;
 		
 		// 2. Add in all values from your leaf list
+		for (int i = 0; i < mLeafList.size(); ++i)
+			priority.push(mLeafList[i]);
 		
 		// 3. Enter the tree generation algorithm
 		//              While the queue has more than 1 node
@@ -182,9 +185,26 @@ class Huffman {
 		//                      Set the parent value to -1, and frequency to the sum of its children
 		//                      Set the 1st and 2nd node's parent to the new node you created
 		//                      Insert new node into queue
+		while (priority.size() > 1) {
+			auto* temp1 = priority.top();
+			priority.pop();
+			auto* temp2 = priority.top();
+			priority.pop();
+
+			unsigned int frequency = 0;
+			frequency += temp1->freq;
+			frequency += temp2->freq;
+
+			HuffNode* parent = new HuffNode(-1, frequency, temp1, temp2);
+
+			temp1->parent = parent;
+			temp2->parent = parent;
+
+			priority.push(parent);
+		}
 
 		// 4. Set the root of the tree (this will be the only node in the queue)
-		
+		mRoot = priority.top();
 	}
 
 	// Generating the encoding table for the Huffman algorithm
