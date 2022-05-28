@@ -48,7 +48,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define HUFFMAN_GENERATE_TREE			1
 #define HUFFMAN_CLEAR_TREE				1
 #define HUFFMAN_DTOR					1
-#define HUFFMAN_GENERATE_ENCODING		0
+#define HUFFMAN_GENERATE_ENCODING		1
 #define HUFFMAN_COMPRESS				0
 #define HUFFMAN_DECOMPRESS				0
 
@@ -216,6 +216,22 @@ class Huffman {
 		//			As you move up, push a 0 to the vector if you passed through a left child connection
 		//			and a 1 if you passed through a right
 		//			Once you hit the root node, reverse the values in the vector
+		for (int i = 0; i < mLeafList.size(); ++i) {
+			auto* temp = mLeafList[i];
+			while (temp != mRoot) {
+				if (temp == temp->parent->left) {
+					mEncodingTable[mLeafList[i]->value].push_back(0);
+					temp = temp->parent;
+					continue;
+				}
+				else if (temp == temp->parent->right) {
+					mEncodingTable[mLeafList[i]->value].push_back(1);
+					temp = temp->parent;
+					continue;
+				}
+			}
+			std::reverse(mEncodingTable[mLeafList[i]->value].begin(), mEncodingTable[mLeafList[i]->value].end());
+		}
 		
 	}
 
