@@ -49,7 +49,7 @@ NOTE: If the unit test is not on, that code will not be compiled!
 #define HUFFMAN_CLEAR_TREE				1
 #define HUFFMAN_DTOR					1
 #define HUFFMAN_GENERATE_ENCODING		1
-#define HUFFMAN_COMPRESS				0
+#define HUFFMAN_COMPRESS				1
 #define HUFFMAN_DECOMPRESS				0
 
 // Wraps up Huffman compression algorithm
@@ -263,14 +263,29 @@ class Huffman {
 	// Note: You will use most of your other functionality to complete this function
 	void Compress(const char* _outputFile) {
 		// 1. Create the frequency table, leaf list, tree, and encoding table
+		GenerateFrequencyTable();
+		GenerateLeafList();
+		GenerateTree();
+		GenerateEncodingTable();
 		
 		// 2. Create a BitOStream and supply it the huffman header
+		BitOfstream bitOfl(_outputFile, (const char*)mFrequencyTable, sizeof(unsigned int)*256);
 		
 		// 3. Open the input file in binary mode with a standard ifstream
+		std::ifstream ifl(mFileName, std::ios::binary);
+		ifl.seekg(0, std::ios::end);
+		size_t totalSize = ifl.tellg();
+		ifl.seekg(0, std::ios::beg);
+		char* buffer = new char[totalSize];
+		ifl.read(buffer, totalSize);
 		
 		// 4. Start the compression process.   (You can read the whole file into a buffer first if you want)
 		//		For each character in the original file, write out the bit-code from the encoding table
-		
+		for(int i = 0; i < totalSize; ++i) {
+			for (unsigned int j = 0; j < 256; ++j)
+				if ((unsigned char)buffer[i] == j)
+					bitOfl << mEncodingTable[j];
+		}
 	}
 
 	// Decompress a huffman-compressed file
